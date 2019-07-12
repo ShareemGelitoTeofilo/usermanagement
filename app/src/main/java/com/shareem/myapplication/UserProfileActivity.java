@@ -5,25 +5,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.shareem.friend.Friend;
-import com.shareem.friend.FriendFactory;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.shareem.user.User;
 
 public class UserProfileActivity extends AppCompatActivity {
+
+    private User user;
+    private TextView txtUserName;
+    private TextView txtUserAge;
+    private TextView txtUserAddress;
+    private TextView txtUserEmail;
+    private ListView listViewFriends;
+    private Button btnLogout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        final Button btnLogout = findViewById(R.id.btnLogout);
-        final FriendListAdapter friendListAdapter = new FriendListAdapter(this, createFriends());
-        final ListView listView = findViewById(R.id.friendListListView);
+        btnLogout = findViewById(R.id.btnLogout);
+        txtUserName = findViewById(R.id.txtName);
+        txtUserAge = findViewById(R.id.txtAge);
+        txtUserAddress = findViewById(R.id.txtAddress);
+        txtUserEmail = findViewById(R.id.txtEmail);
+        user = getIntent().getParcelableExtra("user");
 
-        listView.setAdapter(friendListAdapter);
+        populateUserProfile(user);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,15 +42,14 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 
-    private List<Friend> createFriends(){
-        List<Friend> friends = new ArrayList<>();
-        friends.add(FriendFactory.create("Joker", "jokerhahaha@yahoo.com", "Jaro, Iloilo City"));
-        friends.add(FriendFactory.create("Batman", "batman@yahoo.com", "Jaro, Iloilo City"));
-        friends.add(FriendFactory.create("Superman", "superman@yahoo.com", "Jaro, Iloilo City"));
-        friends.add(FriendFactory.create("Barney", "barney@yahoo.com", "Jaro, Iloilo City"));
-        friends.add(FriendFactory.create("Spiderman", "spiderman@yahoo.com", "Jaro, Iloilo City"));
-        friends.add(FriendFactory.create("Lilo", "lilo@yahoo.com", "Jaro, Iloilo City"));
-        friends.add(FriendFactory.create("Stitch", "stich@yahoo.com", "Jaro, Iloilo City"));
-        return friends;
+    private void populateUserProfile(User user){
+        txtUserName.setText(user.getName());
+        String age = String.valueOf(user.getAge());
+        txtUserAge.setText(age);
+        txtUserAddress.setText(user.getAddress());
+        txtUserEmail.setText(user.getEmail());
+        FriendListAdapter friendListAdapter = new FriendListAdapter(this, user.getFriends());
+        listViewFriends = findViewById(R.id.friendListListView);
+        listViewFriends.setAdapter(friendListAdapter);
     }
 }
