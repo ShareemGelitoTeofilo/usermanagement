@@ -1,6 +1,9 @@
 package com.shareem.friend;
 
-public class Friend {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Friend implements Parcelable {
     private String name;
     private String email;
     private String address;
@@ -9,6 +12,36 @@ public class Friend {
         this.name = name;
         this.email = email;
         this.address = address;
+    }
+
+    public Friend(Parcel in){
+        this.name = in.readString();
+        this.email = in.readString();
+        this.address = in.readString();
+    }
+
+    public static final Creator<Friend> CREATOR = new Creator<Friend>() {
+        @Override
+        public Friend createFromParcel(Parcel in) {
+            return new Friend(in);
+        }
+
+        @Override
+        public Friend[] newArray(int size) {
+            return new Friend[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(email);
+        parcel.writeString(address);
     }
 
     public String getName() {
