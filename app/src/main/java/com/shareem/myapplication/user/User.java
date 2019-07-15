@@ -1,20 +1,27 @@
-package com.shareem.user;
+package com.shareem.myapplication.user;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.shareem.friend.Friend;
+import com.google.gson.annotations.SerializedName;
+import com.shareem.myapplication.friend.Friend;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Parcelable {
 
+    @SerializedName("name")
     private String name;
+    @SerializedName("age")
     private int age;
+    @SerializedName("username")
     private String email;
+    @SerializedName("address")
     private String address;
+    @SerializedName("password")
     private String password;
+    @SerializedName("friends")
     private List<Friend> friends;
 
     public User(String name, int age, String email, String address, String password, List<Friend> friends) {
@@ -71,6 +78,14 @@ public class User implements Parcelable {
         this.name = name;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -101,13 +116,5 @@ public class User implements Parcelable {
 
     public void setFriends(List<Friend> friends) {
         this.friends = friends;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 }

@@ -1,4 +1,4 @@
-package com.shareem.myapplication;
+package com.shareem.myapplication.user;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.shareem.friend.Friend;
+import com.shareem.myapplication.R;
+import com.shareem.myapplication.friend.Friend;
 
 import java.util.List;
 

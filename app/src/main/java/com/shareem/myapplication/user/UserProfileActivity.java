@@ -1,4 +1,4 @@
-package com.shareem.myapplication;
+package com.shareem.myapplication.user;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.shareem.user.User;
+import com.shareem.myapplication.R;
 
 public class UserProfileActivity extends AppCompatActivity {
 

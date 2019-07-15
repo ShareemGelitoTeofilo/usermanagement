@@ -1,4 +1,4 @@
-package com.shareem.friend;
+package com.shareem.myapplication.friend;
 
 import android.os.Parcel;
 import android.os.Parcelable;
