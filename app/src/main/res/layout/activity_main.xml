@@ -10,11 +10,11 @@
 
     <LinearLayout
         android:id="@+id/formLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
 
         <LinearLayout
             android:id="@+id/usernameLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -48,7 +48,7 @@
 
             <EditText
                 android:id="@+id/txtUsername"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="false"
                 android:layout_centerVertical="false"
@@ -61,7 +61,7 @@
 
         <LinearLayout
             android:id="@+id/passwordLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
@@ -76,7 +76,7 @@
 
             <EditText
                 android:id="@+id/txtPassword"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="false"
                 android:layout_centerVertical="false"
@@ -87,15 +87,31 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_gravity="right"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:background="@color/buttonColor"
-            android:text="Login"
-            android:textColor="@color/primaryTextColor" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtLoginCreateAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingEnd="10dp"
+                android:text="Create Account"
+                android:textAlignment="textEnd" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="right"
+                android:background="@color/buttonColor"
+                android:text="Login"
+                android:textColor="@color/primaryTextColor" />
+        </LinearLayout>
 
     </LinearLayout>
 
