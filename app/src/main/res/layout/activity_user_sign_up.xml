@@ -5,17 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="15dp"
     tools:context="com.shareem.myapplication.user.UserSignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
         android:layout_alignParentBottom="false"
-        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="100dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/lblSignUp"
@@ -27,138 +26,96 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtSignUpName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/lblSignUpName"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:text="Name:" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
 
-            <EditText
-                android:id="@+id/txtSignUpName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/inputTextColor"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtSignUpAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="Age"
+            android:inputType="number"
+            android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/lblSignUpAge"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:text="Age:" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
 
-            <EditText
-                android:id="@+id/txtSignUpAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/inputTextColor"
-                android:ems="10"
-                android:inputType="number"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtSignUpAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPersonName"
+            android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/lblSignUpAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:text="Address:" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
 
-            <EditText
-                android:id="@+id/txtSignUpAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/inputTextColor"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtSignUpUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_account_box_black_24dp"
+            android:drawablePadding="3dp"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/lblSignUpUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:text="Username:" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
 
-            <EditText
-                android:id="@+id/txtSignUpUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/inputTextColor"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/txtSignUpPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_lock_gray_24dp"
+            android:drawablePadding="3dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/lblSignUpPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:text="Password:" />
-
-            <EditText
-                android:id="@+id/txtSignUpPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/inputTextColor"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:padding="5dp" />
-
-
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
 
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="@color/buttonColor"
+            android:background="@drawable/login_button_background"
             android:text="SIGN UP"
             android:textColor="@color/primaryTextColor" />
     </LinearLayout>

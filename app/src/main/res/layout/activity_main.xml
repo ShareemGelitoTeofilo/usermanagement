@@ -12,10 +12,9 @@
         android:id="@+id/formLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5">
@@ -32,86 +31,64 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/usernameLayout"
+        <EditText
+            android:id="@+id/txtUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="false"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_account_box_black_24dp"
+            android:drawablePadding="3dp"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/lblUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:text="Username:"
-                android:textColor="@color/primaryTextColor" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
 
-            <EditText
-                android:id="@+id/txtUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="false"
-                android:layout_centerVertical="false"
-                android:background="#C2B0B0"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/passwordLayout"
+        <EditText
+            android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="false"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_lock_gray_24dp"
+            android:drawablePadding="3dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/lblPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:text="Password:"
-                android:textColor="@color/primaryTextColor" />
-
-            <EditText
-                android:id="@+id/txtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="false"
-                android:layout_centerVertical="false"
-                android:background="#C3B1B1"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:padding="5dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="1dp"
+            android:background="#f9d7db" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:background="@drawable/login_button_background"
+            android:text="Login"
+            android:textColor="@color/primaryTextColor" />
 
-            <TextView
-                android:id="@+id/txtLoginCreateAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingEnd="10dp"
-                android:text="Create Account"
-                android:textAlignment="textEnd" />
-
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_gravity="right"
-                android:background="@color/buttonColor"
-                android:text="Login"
-                android:textColor="@color/primaryTextColor" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/txtLoginCreateAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:paddingEnd="10dp"
+            android:text="Create Account"
+            android:textAlignment="textEnd" />
 
     </LinearLayout>
 
