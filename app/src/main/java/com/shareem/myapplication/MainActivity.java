@@ -20,7 +20,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Call<User> userCall;
     private TextView txtUsername;
     private TextView txtPassword;
     private Button btnLogin;
