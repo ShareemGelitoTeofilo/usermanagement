@@ -12,8 +12,7 @@ import com.shareem.myapplication.network.RetrofitInstance;
 import com.shareem.myapplication.user.User;
 import com.shareem.myapplication.user.UserProfileActivity;
 import com.shareem.myapplication.user.UserService;
-
-import java.util.List;
+import com.shareem.myapplication.user.UserSignUpActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtUsername;
     private TextView txtPassword;
     private Button btnLogin;
+    private TextView txtCreateAccount;
     private UserService userService;
 
 
@@ -32,15 +32,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        txtCreateAccount = findViewById(R.id.txtLoginCreateAccount);
         userService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
     }
 
     @Override
     protected void onResume() {
+
+        txtCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UserSignUpActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
