@@ -3,10 +3,15 @@ package com.shareem.myapplication.friend;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Friend implements Parcelable {
+import io.realm.RealmObject;
+
+public class Friend extends RealmObject implements Parcelable {
     private String name;
     private String email;
     private String address;
+
+    public Friend() {
+    }
 
     public Friend(String name, String email, String address){
         this.name = name;

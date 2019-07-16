@@ -9,7 +9,10 @@ import com.shareem.myapplication.friend.Friend;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Parcelable {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
+public class User extends RealmObject implements Parcelable {
 
     @SerializedName("name")
     private String name;
@@ -22,9 +25,12 @@ public class User implements Parcelable {
     @SerializedName("password")
     private String password;
     @SerializedName("friends")
-    private List<Friend> friends;
+    private RealmList<Friend> friends;
 
-    public User(String name, int age, String email, String address, String password, List<Friend> friends) {
+    public User() {
+    }
+
+    public User(String name, int age, String email, String address, String password, RealmList<Friend> friends) {
         this.name = name;
         this.age = age;
         this.email = email;
@@ -39,7 +45,7 @@ public class User implements Parcelable {
         this.email = in.readString();
         this.address = in.readString();
         this.password = in.readString();
-        this.friends = new ArrayList<>();
+        this.friends = new RealmList<>();
         in.readList(this.friends, Friend.class.getClassLoader());
     }
 
@@ -114,7 +120,7 @@ public class User implements Parcelable {
         return friends;
     }
 
-    public void setFriends(List<Friend> friends) {
+    public void setFriends(RealmList<Friend> friends) {
         this.friends = friends;
     }
 }
