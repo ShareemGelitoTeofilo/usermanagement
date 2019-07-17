@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 import com.shareem.myapplication.friend.Friend;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.RealmList;
