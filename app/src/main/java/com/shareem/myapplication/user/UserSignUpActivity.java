@@ -58,8 +58,7 @@ public class UserSignUpActivity extends AppCompatActivity {
         String password = txtPassword.getText().toString();
 
         User user = UserFactory.create(
-                name, age, address,
-                username, password, null
+                name, age, username, address, password, null
         );
 
         Call<User> savedUser = userService.signUpUser(user);
