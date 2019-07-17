@@ -8,12 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shareem.myapplication.history.LoginHistory;
+import com.shareem.myapplication.history.LoginHistoryFactory;
 import com.shareem.myapplication.network.RetrofitInstance;
 import com.shareem.myapplication.user.User;
 import com.shareem.myapplication.user.UserProfileActivity;
 import com.shareem.myapplication.user.UserService;
 import com.shareem.myapplication.user.UserSignUpActivity;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView txtCreateAccount;
     private UserService userService;
+    private Realm realm;
 
 
     @Override
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         txtCreateAccount = findViewById(R.id.txtLoginCreateAccount);
         userService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
+
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -72,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 User user = response.body();
                 String message = String.format("Hello %s", user.getName());
                 greetUser(message);
+                saveLoginHistory(user);
                 Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
@@ -87,5 +95,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void greetUser(String message){
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveLoginHistory(User user){
+        LoginHistory loginHistory = LoginHistoryFactory.create(user.getEmail());
+        realm.beginTransaction();
+        realm.copyToRealm(loginHistory);
+        realm.commitTransaction();
     }
 }
