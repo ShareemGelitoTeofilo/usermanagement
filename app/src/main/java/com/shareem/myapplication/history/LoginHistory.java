@@ -6,27 +6,17 @@ import io.realm.annotations.PrimaryKey;
 public class LoginHistory extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private String id;
     private String username;
-    private int loginTime;
-    private int logoutTime;
+    private long loginTime;
+    private long logoutTime;
 
     public LoginHistory() {
     }
 
-    public LoginHistory(int id, String username, int loginTime, int logoutTime) {
-        this.id = id;
+    public LoginHistory(String username, long loginTime) {
         this.username = username;
         this.loginTime = loginTime;
-        this.logoutTime = logoutTime;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -37,20 +27,28 @@ public class LoginHistory extends RealmObject {
         this.username = username;
     }
 
-    public int getLoginTime() {
+    public long getLoginTime() {
         return loginTime;
     }
 
-    public void setLoginTime(int loginTime) {
+    public void setLoginTime(long loginTime) {
         this.loginTime = loginTime;
     }
 
-    public int getLogoutTime() {
+    public long getLogoutTime() {
         return logoutTime;
     }
 
     public void setLogoutTime(int logoutTime) {
         this.logoutTime = logoutTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 
