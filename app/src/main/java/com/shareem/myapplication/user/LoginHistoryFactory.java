@@ -1,4 +1,4 @@
-package com.shareem.myapplication.history;
+package com.shareem.myapplication.user;
 
 import java.util.UUID;
 
