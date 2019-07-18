@@ -4,13 +4,10 @@ import com.shareem.myapplication.AppCallback;
 import com.shareem.myapplication.loginhistory.LoginHistory;
 import com.shareem.myapplication.loginhistory.LoginHistoryDao;
 import com.shareem.myapplication.loginhistory.LoginHistoryFactory;
-import com.shareem.myapplication.loginhistory.LoginHistoryMapper;
-import com.shareem.myapplication.loginhistory.LoginHistoryRO;
 import com.shareem.myapplication.network.RetrofitInstance;
 
 import java.util.List;
 
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +40,7 @@ public class UserLogic {
         return loginHistories;
     }
 
-    public List<User> getAllUsersExceptWithId(int id, final AppCallback callback){
+    public void getAllUsersExceptWithId(int id, final AppCallback callback){
         Call<List<User>> userCalls = userService.findAllUsersExceptWithId(id);
         userCalls.enqueue(new Callback<List<User>>() {
             @Override
