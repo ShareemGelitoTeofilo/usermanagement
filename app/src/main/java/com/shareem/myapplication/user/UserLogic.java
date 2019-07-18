@@ -16,11 +16,13 @@ public class UserLogic {
 
     private static UserLogic userLogicInstance;
     private LoginHistoryDao loginHistoryDao;
+    private UserDao userDao;
     private UserService userService;
 
     private UserLogic() {
         userService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
         loginHistoryDao = new LoginHistoryDao();
+        userDao = new UserDao();
     }
 
     public static UserLogic getInstance(){
@@ -28,6 +30,12 @@ public class UserLogic {
             userLogicInstance = new UserLogic();
         }
         return userLogicInstance;
+    }
+
+    public User addFriend(int userID, User userToAdd){
+        User user = userDao.findById(userID);
+        user.getFriends().add(userToAdd);
+        return userDao.update(user);
     }
 
     public void signUpUser(User user, final AppCallback callback){
