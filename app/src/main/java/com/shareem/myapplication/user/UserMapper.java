@@ -21,7 +21,9 @@ public class UserMapper {
     public static UserRO toUserRO(User user){
         UserRO userRO = new UserRO();
         userRO.setId(user.getId());
+        userRO.setName(user.getName());
         userRO.setAddress(user.getAddress());
+        userRO.setUsername(user.getUsername());
         userRO.setAge(user.getAge());
         RealmList<UserRO> friends = toUserROs(user.getFriends());
         userRO.setFriends(friends);
@@ -31,7 +33,9 @@ public class UserMapper {
     public static User toUser(UserRO userRO){
         User user = new User();
         user.setId(userRO.getId());
+        user.setName(userRO.getName());
         user.setAddress(userRO.getAddress());
+        user.setUsername(userRO.getUsername());
         user.setAge(userRO.getAge());
         List<User> friends = toUsers(userRO.getFriends());
         user.setFriends(friends);
