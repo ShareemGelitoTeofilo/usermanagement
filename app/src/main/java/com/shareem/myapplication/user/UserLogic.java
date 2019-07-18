@@ -30,6 +30,24 @@ public class UserLogic {
         return userLogicInstance;
     }
 
+    public void signUpUser(User user, final AppCallback callback){
+        Call<User> userCall = userService.signUpUser(user);
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User user = response.body();
+                callback.onCallback(user, "Successfully retrieved all users");
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onCallback(null, "");
+            }
+        });
+
+
+    }
+
     public LoginHistory createLoginHistoryForUser(User user){
         LoginHistory loginHistory = LoginHistoryFactory.create(user.getUsername());
         return loginHistoryDao.insert(loginHistory);
