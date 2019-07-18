@@ -8,16 +8,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.shareem.myapplication.R;
-import com.shareem.myapplication.friend.Friend;
 
 import java.util.List;
 
+// TODO convert to base adapter
 public class FriendListAdapter extends ArrayAdapter {
 
     private final Activity context;
-    private List<Friend> friends;
+    private List<User> friends;
 
-    public FriendListAdapter(Activity context, List<Friend> friends){
+    public FriendListAdapter(Activity context, List<User> friends){
         super(context, R.layout.userprofile_friendlist_listview_row, friends);
         this.context = context;
         this.friends = friends;
@@ -33,7 +33,7 @@ public class FriendListAdapter extends ArrayAdapter {
         TextView txtFriendAddress = rowView.findViewById(R.id.txtFriendAddress);
 
         txtFriendName.setText(friends.get(position).getName());
-        txtFriendEmail.setText(friends.get(position).getEmail());
+        txtFriendEmail.setText(friends.get(position).getUsername());
         txtFriendAddress.setText(friends.get(position).getAddress());
 
         return rowView;
