@@ -32,6 +32,10 @@ public class UserLogic {
         return userLogicInstance;
     }
 
+    public User findById(int userId){
+        return userDao.findById(userId);
+    }
+
     public User addFriend(int userID, User userToAdd){
         User user = userDao.findById(userID);
         user.getFriends().add(userToAdd);
