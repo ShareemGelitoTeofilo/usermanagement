@@ -1,5 +1,6 @@
 package com.shareem.myapplication.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.RealmList;
@@ -24,7 +25,7 @@ public class UserMapper {
         userRO.setAge(user.getAge());
         RealmList<UserRO> friends = toUserROs(user.getFriends());
         userRO.setFriends(friends);
-        return null;
+        return userRO;
     }
 
     public static User toUser(UserRO userRO){
@@ -34,21 +35,25 @@ public class UserMapper {
         user.setAge(userRO.getAge());
         List<User> friends = toUsers(userRO.getFriends());
         user.setFriends(friends);
-        return null;
+        return user;
     }
 
     public static RealmList<UserRO> toUserROs(List<User> users){
         RealmList<UserRO> userROS = new RealmList<>();
-        for(User user : users){
-            userROS.add(toUserRO(user));
+        if(users != null) {
+            for (User user : users) {
+                userROS.add(toUserRO(user));
+            }
         }
         return userROS;
     }
 
     public static List<User> toUsers(RealmList<UserRO> userROs){
-        List<User> users = new RealmList<>();
-        for(UserRO userRO : userROs){
-            users.add(toUser(userRO));
+        List<User> users = new ArrayList<>();
+        if(userROs != null) {
+            for (UserRO userRO : userROs) {
+                users.add(toUser(userRO));
+            }
         }
         return users;
     }
