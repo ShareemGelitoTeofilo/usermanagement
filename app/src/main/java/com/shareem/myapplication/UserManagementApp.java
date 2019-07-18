@@ -14,7 +14,7 @@ public class UserManagementApp extends Application {
         super.onCreate();
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name("default2")
+                .name("default2.realm")
                 .schemaVersion(3)
                 .deleteRealmIfMigrationNeeded()
                 .build();
