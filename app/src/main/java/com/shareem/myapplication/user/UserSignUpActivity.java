@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shareem.myapplication.AppCallback;
 import com.shareem.myapplication.R;
 import com.shareem.myapplication.network.RetrofitInstance;
 
@@ -22,7 +23,7 @@ public class UserSignUpActivity extends AppCompatActivity {
     private TextView txtUsername;
     private TextView txtPassword;
     private Button btnSignUp;
-    private UserService userService;
+    private UserLogic userLogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class UserSignUpActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtSignUpUsername);
         txtPassword = findViewById(R.id.txtSignUpPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
-        userService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
+        userLogic = UserLogic.getInstance();
     }
 
     @Override
@@ -61,17 +62,14 @@ public class UserSignUpActivity extends AppCompatActivity {
                 name, age, username, address, password, null
         );
 
-        Call<User> savedUser = userService.signUpUser(user);
-
-        savedUser.enqueue(new Callback<User>() {
+        userLogic.signUpUser(user, new AppCallback() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onCallback(Object response, String message) {
+                if(!message.isEmpty()){
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to sign up user", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
