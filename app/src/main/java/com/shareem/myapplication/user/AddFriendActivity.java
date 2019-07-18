@@ -2,14 +2,55 @@ package com.shareem.myapplication.user;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.shareem.myapplication.AppCallback;
 import com.shareem.myapplication.R;
 
+import java.util.List;
+
 public class AddFriendActivity extends AppCompatActivity {
+
+    private UserLogic userLogic;
+    private User user;
+    private ListView usersListView;
+    private View.OnClickListener btnAddFriendOnClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
+        userLogic = UserLogic.getInstance();
+        user = getIntent().getParcelableExtra("user");
+        usersListView = findViewById(R.id.listViewAddFriends);
+    }
+
+    @Override
+    protected void onResume() {
+
+        btnAddFriendOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Added as friend", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        userLogic.getAllUsersExceptWithId(user.getId(), new AppCallback() {
+            @Override
+            public void onCallback(Object response, String message) {
+                List<User> users = (List<User>) response;
+                if(!users.isEmpty()){
+                    AddFriendListAdapter addFriendListAdapter = new AddFriendListAdapter(
+                            AddFriendActivity.this, users, btnAddFriendOnClickListener
+                    );
+                    usersListView.setAdapter(addFriendListAdapter);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to load users", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        super.onResume();
     }
 }
