@@ -25,4 +25,15 @@ public class UserDao {
         realm.close();
         return user;
     }
+
+    public User findById(int id){
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        UserRO userRO = realm.where(UserRO.class)
+                .equalTo("id", id)
+                .findFirst();
+        User user = UserMapper.toUser(userRO);
+        realm.close();
+        return user;
+    }
 }
