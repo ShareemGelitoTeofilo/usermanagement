@@ -1,5 +1,6 @@
 package com.shareem.myapplication.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +24,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView txtUserEmail;
     private ListView listViewFriends;
     private Button btnLogout;
+    private Button btnAddFriends;
     private Button btnShowLoginHistory;
     private UserLogic userLogic;
 
@@ -36,6 +38,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         btnLogout = findViewById(R.id.btnLogout);
         btnShowLoginHistory = findViewById(R.id.btnShowLoginHistory);
+        btnAddFriends = findViewById(R.id.btnAddFriends);
         txtUserName = findViewById(R.id.txtName);
         txtUserAge = findViewById(R.id.txtAge);
         txtUserAddress = findViewById(R.id.txtAddress);
@@ -44,12 +47,7 @@ public class UserProfileActivity extends AppCompatActivity {
         user = getIntent().getParcelableExtra("user");
         populateUserProfile(user);
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
     }
 
     @Override
@@ -59,6 +57,22 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showLoginHistory(user);
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        btnAddFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddFriendActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
             }
         });
     }
