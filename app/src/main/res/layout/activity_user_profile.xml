@@ -179,8 +179,18 @@
         app:layout_constraintStart_toStartOf="@+id/guideline">
 
         <Button
+            android:id="@+id/btnAddFriends"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:text="Add Friends"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2" />
+
+        <Button
             android:id="@+id/btnShowLoginHistory"
-            android:layout_width="193dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/button_background"
