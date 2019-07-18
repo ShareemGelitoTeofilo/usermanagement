@@ -1,4 +1,4 @@
-package com.shareem.myapplication.user;
+package com.shareem.myapplication.loginhistory;
 
 import java.util.List;
 
@@ -10,8 +10,10 @@ public class LoginHistoryDao {
     public LoginHistory insert(LoginHistory loginHistory){
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        loginHistory = realm.copyToRealm(loginHistory);
+        LoginHistoryRO loginHistoryRO = LoginHistoryMapper.toLoginHistoryRO(loginHistory);
+        realm.copyToRealm(loginHistoryRO);
         realm.commitTransaction();
+        loginHistory = LoginHistoryMapper.toLoginHistory(loginHistoryRO);
         realm.close();
         return loginHistory;
     }
@@ -19,10 +21,11 @@ public class LoginHistoryDao {
     public List<LoginHistory> findAllByUsername(String username) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        RealmResults<LoginHistory> loginHistory = realm.where(LoginHistory.class)
+        RealmResults<LoginHistoryRO> loginHistoryROs = realm.where(LoginHistoryRO.class)
                 .equalTo("username", username)
                 .findAll();
+        List<LoginHistory> loginHistories = LoginHistoryMapper.toLoginHistories(loginHistoryROs);
         realm.close();
-        return loginHistory;
+        return loginHistories;
     }
 }

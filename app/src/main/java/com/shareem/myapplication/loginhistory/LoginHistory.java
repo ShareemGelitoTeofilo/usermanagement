@@ -1,11 +1,7 @@
-package com.shareem.myapplication.user;
+package com.shareem.myapplication.loginhistory;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+public class LoginHistory {
 
-public class LoginHistory extends RealmObject {
-
-    @PrimaryKey
     private String id;
     private String username;
     private long loginTime;
@@ -39,7 +35,7 @@ public class LoginHistory extends RealmObject {
         return logoutTime;
     }
 
-    public void setLogoutTime(int logoutTime) {
+    public void setLogoutTime(long logoutTime) {
         this.logoutTime = logoutTime;
     }
 

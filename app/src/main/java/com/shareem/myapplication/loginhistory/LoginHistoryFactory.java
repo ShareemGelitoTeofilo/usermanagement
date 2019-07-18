@@ -1,4 +1,4 @@
-package com.shareem.myapplication.user;
+package com.shareem.myapplication.loginhistory;
 
 import java.util.UUID;
 
