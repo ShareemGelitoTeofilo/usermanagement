@@ -58,30 +58,46 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String usernameValue = txtUsername.getText().toString();
                 String passwordValue = txtPassword.getText().toString();
+                userLogic.loginUser(usernameValue, passwordValue, new AppCallback() {
+                            @Override
+                            public void onCallback(Object response, String message) {
+                                User user = (User) response;
+                                String popMessage;
+                                if(!message.isEmpty()){
+                                    popMessage = "Welcome " + user.getName();
+                                    popMessage(popMessage);
+                                    Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                                    intent.putExtra("user", user);
+                                    startActivity(intent);
+                                } else {
+                                    popMessage = "Sorry failed to login";
+                                    popMessage(popMessage);
+                                }
+                            }});
 
-                loginUser(usernameValue, passwordValue);
                 txtUsername.setText("");
                 txtPassword.setText("");
             }
         });
 
-        super.onResume();}
+        super.onResume();
+    }
 
-    private void loginUser(String username, String password) {
+    private void loginUser(String username, String password, final AppCallback callback) {
         Call<User> userCall = userService.loginUser(username, password);
         userCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                if(response.isSuccessful()){
                    User user = response.body();
-                   String message = null;
                    if (user != null) {
-                       message = String.format("Hello %s", user.getName());
-                       greetUser(message);
+                       String message = "Welcome " + user.getName();
+                       popMessage(message);
                        userLogic.createLoginHistoryForUser(user);
                        Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
                        intent.putExtra("user", user);
                        startActivity(intent);
+                       callback.onCallback(user, "safsf");
                    } else {}
                }else {
                    response.errorBody();
@@ -96,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void greetUser(String message){
+    private void popMessage(String message){
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
     }
 }
