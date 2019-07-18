@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shareem.myapplication.R;
+import com.shareem.myapplication.loginhistory.LoginHistory;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -68,7 +69,7 @@ public class UserProfileActivity extends AppCompatActivity {
         txtUserAge.setText(age);
         txtUserAddress.setText(user.getAddress());
         txtUserEmail.setText(user.getUsername());
-        FriendListAdapter friendListAdapter = new FriendListAdapter(this, user.getFriends());
+        FriendListBaseAdapter friendListAdapter = new FriendListBaseAdapter(this, user.getFriends());
         listViewFriends = findViewById(R.id.friendListListView);
         listViewFriends.setAdapter(friendListAdapter);
     }
