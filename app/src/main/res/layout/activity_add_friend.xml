@@ -65,7 +65,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_background"
-        android:padding="10"
+        android:padding="10dp"
         android:text="Back"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline8" />
