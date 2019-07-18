@@ -30,6 +30,7 @@ public class User implements Parcelable {
     }
 
     public User(Parcel in) {
+        this.id = in.readInt();
         this.name = in.readString();
         this.age = in.readInt();
         this.username = in.readString();
@@ -46,6 +47,7 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(name);
         parcel.writeInt(age);
         parcel.writeString(username);
