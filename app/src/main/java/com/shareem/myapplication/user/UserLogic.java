@@ -44,6 +44,7 @@ public class UserLogic {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();
+                userDao.insert(user);
                 callback.onCallback(user, "Successfully retrieved all users");
             }
 
