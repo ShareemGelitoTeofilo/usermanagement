@@ -9,12 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shareem.myapplication.R;
-import com.shareem.myapplication.history.LoginHistory;
 
 import java.sql.Timestamp;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
+import java.util.List;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -26,7 +23,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private ListView listViewFriends;
     private Button btnLogout;
     private Button btnShowLoginHistory;
-    private Realm realm;
+    private UserLogic userLogic;
 
 
     @Override
@@ -34,8 +31,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        Realm.init(this);
-        realm = Realm.getDefaultInstance();
+        userLogic = UserLogic.getInstance();
 
         btnLogout = findViewById(R.id.btnLogout);
         btnShowLoginHistory = findViewById(R.id.btnShowLoginHistory);
@@ -58,7 +54,6 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         btnShowLoginHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,22 +67,20 @@ public class UserProfileActivity extends AppCompatActivity {
         String age = String.valueOf(user.getAge());
         txtUserAge.setText(age);
         txtUserAddress.setText(user.getAddress());
-        txtUserEmail.setText(user.getEmail());
+        txtUserEmail.setText(user.getUsername());
         FriendListAdapter friendListAdapter = new FriendListAdapter(this, user.getFriends());
         listViewFriends = findViewById(R.id.friendListListView);
         listViewFriends.setAdapter(friendListAdapter);
     }
 
     private void showLoginHistory(User user){
-        RealmResults<LoginHistory> loginHistories = realm.where(LoginHistory.class)
-                                            .equalTo("username", user.getEmail())
-                                            .findAll();
+        List<LoginHistory> loginHistories = userLogic.getLoginHistoriesByUsername(user.getUsername());
         String result;
         if(loginHistories != null || !loginHistories.isEmpty()){
-            result = "Username: " + user.getEmail() + "\n" +
-                     "Login dates: \n";
-            for (LoginHistory loginHistory: loginHistories){
-                Timestamp time = new Timestamp(loginHistory.getLoginTime());
+            result = String.format("Username: %s \n " +
+                                   "Login dates: \n", user.getUsername());
+            for(int i=0; i<loginHistories.size(); i++){
+                Timestamp time = new Timestamp(loginHistories.get(i).getLoginTime());
                 result += "Time: " + time.toString() + "\n";
             }
         } else {
