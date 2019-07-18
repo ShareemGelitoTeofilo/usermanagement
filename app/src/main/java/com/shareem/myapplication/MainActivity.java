@@ -5,30 +5,29 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shareem.myapplication.history.LoginHistory;
-import com.shareem.myapplication.history.LoginHistoryFactory;
-import com.shareem.myapplication.network.RetrofitInstance;
 import com.shareem.myapplication.user.User;
+import com.shareem.myapplication.user.UserLogic;
+import com.shareem.myapplication.network.RetrofitInstance;
 import com.shareem.myapplication.user.UserProfileActivity;
 import com.shareem.myapplication.user.UserService;
 import com.shareem.myapplication.user.UserSignUpActivity;
 
-import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txtUsername;
-    private TextView txtPassword;
+    private EditText txtUsername;
+    private EditText txtPassword;
     private Button btnLogin;
     private TextView txtCreateAccount;
     private UserService userService;
-    private Realm realm;
+    private UserLogic userLogic;
 
 
     @Override
@@ -40,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         txtCreateAccount = findViewById(R.id.txtLoginCreateAccount);
         userService = RetrofitInstance.getRetrofitInstance().create(UserService.class);
-
-        Realm.init(this);
-        realm = Realm.getDefaultInstance();
+        userLogic = UserLogic.getInstance();
     }
 
     @Override
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         txtCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), UserSignUpActivity.class);
+                Intent intent = new Intent(MainActivity.this, UserSignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -68,21 +65,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        super.onResume();
-    }
+        super.onResume();}
 
     private void loginUser(String username, String password) {
         Call<User> userCall = userService.loginUser(username, password);
         userCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User user = response.body();
-                String message = String.format("Hello %s", user.getName());
-                greetUser(message);
-                saveLoginHistory(user);
-                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
+               if(response.isSuccessful()){
+                   User user = response.body();
+                   String message = null;
+                   if (user != null) {
+                       message = String.format("Hello %s", user.getName());
+                       greetUser(message);
+                       userLogic.createLoginHistoryForUser(user);
+                       Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                       intent.putExtra("user", user);
+                       startActivity(intent);
+                   } else {}
+               }else {
+                   response.errorBody();
+               }
             }
 
             @Override
@@ -95,12 +98,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void greetUser(String message){
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
-    }
-
-    private void saveLoginHistory(User user){
-        LoginHistory loginHistory = LoginHistoryFactory.create(user.getEmail());
-        realm.beginTransaction();
-        realm.copyToRealm(loginHistory);
-        realm.commitTransaction();
     }
 }
