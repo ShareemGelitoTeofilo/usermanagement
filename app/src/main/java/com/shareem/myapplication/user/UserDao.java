@@ -1,5 +1,7 @@
 package com.shareem.myapplication.user;
 
+import java.util.List;
+
 import io.realm.Realm;
 
 public class UserDao {
