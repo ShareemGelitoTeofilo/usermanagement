@@ -1,8 +1,10 @@
 package com.shareem.myapplication.user;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,7 +19,7 @@ public class AddFriendActivity extends AppCompatActivity {
     private User user;
     private ListView usersListView;
     private View.OnClickListener btnAddFriendOnClickListener;
-
+    private Button btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +27,12 @@ public class AddFriendActivity extends AppCompatActivity {
         userLogic = UserLogic.getInstance();
         user = getIntent().getParcelableExtra("user");
         usersListView = findViewById(R.id.listViewAddFriends);
+        btnBack = findViewById(R.id.btnAddFriendBack);
     }
 
     @Override
     protected void onResume() {
+        super.onResume();
 
         btnAddFriendOnClickListener = new View.OnClickListener() {
             @Override
@@ -54,6 +58,13 @@ public class AddFriendActivity extends AppCompatActivity {
                 }
             }
         });
-        super.onResume();
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 }
