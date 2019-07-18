@@ -15,7 +15,7 @@ public class RetrofitInstance {
             .readTimeout(60, TimeUnit.SECONDS);
     public static Retrofit getRetrofitInstance() {
         if(retrofit == null) {
-            retrofit = new retrofit2.Retrofit.Builder()
+            retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(httpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
