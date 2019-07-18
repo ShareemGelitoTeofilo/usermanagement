@@ -3,8 +3,9 @@ package com.shareem.myapplication.user;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmList;
+import io.realm.RealmObject;
 
-public class UserRO {
+public class UserRO extends RealmObject {
 
     @SerializedName("id")
     private int id;
