@@ -33,7 +33,10 @@ public class AddFriendActivity extends AppCompatActivity {
         btnAddFriendOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Added as friend", Toast.LENGTH_SHORT).show();
+                User userToAddAsFriend = (User) view.getTag();
+                userLogic.addFriend(user.getId(), userToAddAsFriend);
+                String message = String.format("Added %s as friend", userToAddAsFriend.getName());
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         };
 
