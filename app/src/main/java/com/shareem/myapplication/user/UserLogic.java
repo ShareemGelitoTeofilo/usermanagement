@@ -43,6 +43,23 @@ public class UserLogic {
         return loginHistories;
     }
 
+    public List<User> getAllUsersExceptWithId(int id, final AppCallback callback){
+        Call<List<User>> userCalls = userService.findAllUsersExceptWithId(id);
+        userCalls.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                List<User> users = response.body();
+                callback.onCallback(users, "Successfully retrieved all users");
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                callback.onCallback(null, "");
+            }
+        });
+
+    }
+
 
     public void loginUser(String username, String password, final AppCallback callback) {
         Call<User> userCall = userService.loginUser(username, password);
