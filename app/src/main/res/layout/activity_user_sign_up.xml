@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="@drawable/login_button_background"
+            android:background="@drawable/button_background"
             android:text="SIGN UP"
             android:textColor="@color/primaryTextColor" />
     </LinearLayout>

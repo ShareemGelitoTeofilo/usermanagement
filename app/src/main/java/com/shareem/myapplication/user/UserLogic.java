@@ -43,6 +43,7 @@ public class UserLogic {
         return loginHistories;
     }
 
+
     public void loginUser(String username, String password, final AppCallback callback) {
         Call<User> userCall = userService.loginUser(username, password);
         userCall.enqueue(new Callback<User>() {

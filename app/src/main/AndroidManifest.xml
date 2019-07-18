@@ -15,9 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".userRO.UserSignUpActivity"></activity>
-        <activity android:name=".userRO.UserProfileActivity"
-            />
+        <activity android:name=".user.AddFriendActivity"></activity>
+        <activity android:name=".user.UserSignUpActivity" />
+        <activity android:name=".user.UserProfileActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
