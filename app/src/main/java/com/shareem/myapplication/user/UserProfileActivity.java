@@ -46,13 +46,15 @@ public class UserProfileActivity extends AppCompatActivity {
 
         user = getIntent().getParcelableExtra("user");
         populateUserProfile(user);
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        user = userLogic.findById(user.getId());
+        populateUserProfile(user);
+
         btnShowLoginHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
