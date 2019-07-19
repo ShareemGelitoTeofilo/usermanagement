@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import io.realm.RealmList;
 
 public class User implements Parcelable {
@@ -122,5 +124,19 @@ public class User implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj == this){
+            return true;
+        }
+
+        if(!(obj instanceof User)){
+            return false;
+        }
+
+        User user = (User) obj;
+        return user.getId() == this.getId();
     }
 }
