@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.shareem.myapplication.AppCallback;
 import com.shareem.myapplication.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddFriendActivity extends AppCompatActivity {
@@ -52,7 +51,7 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void onCallback(Object response, String message) {
                 List<User> responseUsers = (List<User>) response;
-                responseUsers = getAllNotFriendsOfUser(user, responseUsers);
+                responseUsers = userLogic.getAllNotFriendsOfUser(user, responseUsers);
                 if(!responseUsers.isEmpty()){
                     addFriendListAdapter = new AddFriendListAdapter(
                             AddFriendActivity.this, responseUsers, btnAddFriendOnClickListener
@@ -70,12 +69,5 @@ public class AddFriendActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private List<User> getAllNotFriendsOfUser(User user, List<User> responseUsers){
-        List<User> friends =  userLogic.findById(user.getId()).getFriends();
-        List<User> notFriends = new ArrayList<>(responseUsers);
-        notFriends.removeAll(friends);
-        return notFriends;
     }
 }

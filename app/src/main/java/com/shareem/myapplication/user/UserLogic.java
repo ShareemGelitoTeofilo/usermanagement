@@ -6,6 +6,7 @@ import com.shareem.myapplication.loginhistory.LoginHistoryDao;
 import com.shareem.myapplication.loginhistory.LoginHistoryFactory;
 import com.shareem.myapplication.network.RetrofitInstance;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -104,6 +105,13 @@ public class UserLogic {
                 callback.onCallback(null, "");
             }
         });
+    }
+
+    public List<User> getAllNotFriendsOfUser(User user, List<User> responseUsers){
+        List<User> friends =  findById(user.getId()).getFriends();
+        List<User> notFriends = new ArrayList<>(responseUsers);
+        notFriends.removeAll(friends);
+        return notFriends;
     }
 
 
