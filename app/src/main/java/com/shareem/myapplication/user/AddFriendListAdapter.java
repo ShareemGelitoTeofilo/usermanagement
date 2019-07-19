@@ -59,4 +59,8 @@ public class AddFriendListAdapter extends BaseAdapter {
 
         return rowView;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
 }

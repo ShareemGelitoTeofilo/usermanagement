@@ -1,8 +1,7 @@
 package com.shareem.myapplication.user;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -11,6 +10,7 @@ import android.widget.Toast;
 import com.shareem.myapplication.AppCallback;
 import com.shareem.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddFriendActivity extends AppCompatActivity {
@@ -20,6 +20,8 @@ public class AddFriendActivity extends AppCompatActivity {
     private ListView usersListView;
     private View.OnClickListener btnAddFriendOnClickListener;
     private Button btnBack;
+    private AddFriendListAdapter addFriendListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,8 @@ public class AddFriendActivity extends AppCompatActivity {
             public void onClick(View view) {
                 User userToAddAsFriend = (User) view.getTag();
                 userLogic.addFriend(user.getId(), userToAddAsFriend);
+                addFriendListAdapter.getUsers().remove(userToAddAsFriend);
+                addFriendListAdapter.notifyDataSetChanged();
                 String message = String.format("Added %s as friend", userToAddAsFriend.getName());
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
@@ -47,10 +51,11 @@ public class AddFriendActivity extends AppCompatActivity {
         userLogic.getAllUsersExceptWithId(user.getId(), new AppCallback() {
             @Override
             public void onCallback(Object response, String message) {
-                List<User> users = (List<User>) response;
-                if(!users.isEmpty()){
-                    AddFriendListAdapter addFriendListAdapter = new AddFriendListAdapter(
-                            AddFriendActivity.this, users, btnAddFriendOnClickListener
+                List<User> responseUsers = (List<User>) response;
+                responseUsers = getAllNotFriendsOfUser(user, responseUsers);
+                if(!responseUsers.isEmpty()){
+                    addFriendListAdapter = new AddFriendListAdapter(
+                            AddFriendActivity.this, responseUsers, btnAddFriendOnClickListener
                     );
                     usersListView.setAdapter(addFriendListAdapter);
                 } else {
@@ -65,6 +70,12 @@ public class AddFriendActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private List<User> getAllNotFriendsOfUser(User user, List<User> responseUsers){
+        List<User> friends =  userLogic.findById(user.getId()).getFriends();
+        List<User> notFriends = new ArrayList<>(responseUsers);
+        notFriends.removeAll(friends);
+        return notFriends;
     }
 }
